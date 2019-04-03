@@ -1,5 +1,6 @@
 
 require_relative '../../config/environment'
+require 'pry'
 
 class ApplicationController < Sinatra::Base
 
@@ -44,16 +45,18 @@ class ApplicationController < Sinatra::Base
 
   patch '/posts/:id' do
     @post = Post.find(params[:id])
-    @post.name
-    @post.content
+    # binding.pry
+    @post.name = params[:name]
+    @post.content = params[:content]
     @post.save
     erb :show
   end
 
   #DELETE
 
-  get '/posts/:id/delete' do
+  delete '/posts/:id/delete' do
     @post = Post.find(params[:id])
+    # binding.pry
     @post.delete
     redirect to '/posts'
   end
